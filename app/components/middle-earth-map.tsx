@@ -523,17 +523,17 @@ export default function MiddleEarthMap() {
                   pointerEvent.stopPropagation();
                   setSelected({ kind: "event", item: event });
                 }}
-                className="group absolute -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-sm border-[6px] border-stone-950 bg-red-500 shadow-[0_0_0_12px_rgba(239,68,68,0.2)] transition hover:scale-125 focus:outline-none focus-visible:scale-125"
+                className="group absolute rounded-sm focus:outline-none"
                 style={{
                   left: point.x,
                   top: point.y,
-                  transform: `translate(-50%, -50%) rotate(45deg) scale(${markerScale})`,
+                  transform: `translate(-50%, -50%) scale(${markerScale})`,
                   transformOrigin: "center",
                 }}
                 aria-label={`Open ${event.title}`}
               >
-                <span className="block h-12 w-12" />
-                <span className="absolute left-1/2 top-14 hidden -translate-x-1/2 -rotate-45 whitespace-nowrap rounded bg-stone-950/90 px-4 py-2 text-[30px] font-medium text-stone-50 shadow-lg group-hover:block group-focus-visible:block">
+                <span className="block h-12 w-12 rotate-45 rounded-sm border-[6px] border-stone-950 bg-red-500 shadow-[0_0_0_12px_rgba(239,68,68,0.2)] transition group-hover:scale-125 group-focus-visible:scale-125" />
+                <span className="absolute left-1/2 top-16 hidden -translate-x-1/2 whitespace-nowrap rounded bg-stone-950/90 px-4 py-2 text-[30px] font-medium text-stone-50 shadow-lg group-hover:block group-focus-visible:block">
                   {event.title}
                 </span>
               </button>
