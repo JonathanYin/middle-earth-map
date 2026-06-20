@@ -8,7 +8,7 @@ export type PlaceCategory =
   | "evil"
   | "wild";
 
-export type EventType = "quest" | "battle" | "encounter" | "council" | "death";
+export type EventType = "quest" | "battle" | "encounter" | "council";
 
 export type Coordinate = {
   x: number;
@@ -261,16 +261,6 @@ export const events: StoryEvent[] = [
       "Representatives of the Free Peoples decide that the Ring must be destroyed in Mordor.",
   },
   {
-    id: "moria-fall",
-    title: "The Fall in Moria",
-    type: "death",
-    placeId: "moria",
-    chronology: "The Fellowship of the Ring, Book II",
-    books: ["lotr"],
-    description:
-      "Gandalf confronts the Balrog on the Bridge of Khazad-dum and falls into shadow.",
-  },
-  {
     id: "breaking-fellowship",
     title: "Breaking of the Fellowship",
     type: "quest",
@@ -431,5 +421,4 @@ export const eventTypeLabels: Record<EventType, string> = {
   battle: "Battle",
   encounter: "Encounter",
   council: "Council",
-  death: "Death",
 };
