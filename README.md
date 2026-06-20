@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Middle-earth Map
+
+An interactive Next.js map for exploring places, events, battles, and paths from
+*The Hobbit* and *The Lord of the Rings*.
+
+The app renders a high-resolution Middle-earth map with pan/zoom controls,
+filterable markers, route overlays, collapsible side panels, and selected item
+details.
 
 ## Getting Started
 
-First, run the development server:
+Install dependencies and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Useful Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+For visual checks, run the dev server and capture a screenshot:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx playwright screenshot --viewport-size=1440,1000 http://localhost:3000 /tmp/middle-earth-map.png
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `app/page.tsx`: route entrypoint.
+- `app/components/middle-earth-map.tsx`: the only map component with `"use client"`; owns pan/zoom/filter state and browser events.
+- `app/components/map/`: presentational components and pure helpers for the map UI.
+- `lib/map-data.ts`: typed places, events, and paths.
+- `public/map/map.webp`: base map image.
+- `DESIGN.md`: Slack-inspired UI reference used for overlay styling.
 
-## Deploy on Vercel
+## Map Data
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Marker coordinates in `lib/map-data.ts` are normalized `{ x, y }` values against
+the `5000x4344` map image. Conversion to pixel coordinates happens in
+`app/components/map/geometry.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+
+- The base map file is served directly as a raw image for sharpness.
+- The reference site currently uses the same `5000x4344` WebP asset as a single image overlay.
+- Keep interactive browser logic inside `middle-earth-map.tsx` when possible; avoid adding `"use client"` to pure presentation modules.
+- See `AGENTS.md` for additional guidance for coding agents working in this repo.
